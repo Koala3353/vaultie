@@ -14,7 +14,7 @@
 // New versions arrive on the next launch, or instantly via Settings → "Check
 // for updates" (which clears this cache and reloads).
 
-const CACHE = "vaultie-shell-v1";
+const CACHE = "vaultie-shell-v2";
 
 self.addEventListener("install", () => {
   self.skipWaiting();

@@ -6,29 +6,24 @@ export default {
     extend: {
       colors: {
         sapphire: {
-          DEFAULT: "#3C507D",
-          dark: "#112250",
-          light: "#E0C58F",
+          DEFAULT: "#3B82F6", // vibrant blue
+          dark: "#1D4ED8",
+          light: "#93C5FD",
         },
-        royal: "#112250",
-        quicksand: "#E0C58F",
-        swan: "#F5F0E9",
-        shell: "#D9CBC2",
         over: "#E5484D", // tomato / over-budget red
         caution: "#F5A623", // amber / nearing limit
-        // New theme: blue/beige tinted neutral ramp
         gray: {
-          50: "#F5F0E9", // Swan Wing: light page bg / dark primary text
-          100: "#EDE7E0", // light track + toggle bg
-          200: "#D9CBC2", // Shellstone: light border / disabled fill
-          300: "#C6B7AE", // light stronger border
-          400: "#9C928F", // muted (reads in both modes)
-          500: "#706D75", // light muted text
-          600: "#4D556B", // light body text
-          700: "#324063", // dark input border
-          800: "#223259", // dark border / raised surface
-          900: "#182654", // light primary text / dark card
-          950: "#112250", // Royal Blue: dark page bg
+          50: "#f8fafc",
+          100: "#f1f5f9",
+          200: "#e2e8f0",
+          300: "#cbd5e1",
+          400: "#94a3b8",
+          500: "#64748b",
+          600: "#475569",
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+          950: "#020617",
         },
       },
       fontFamily: {
