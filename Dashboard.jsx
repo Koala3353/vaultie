@@ -28,6 +28,7 @@ import RingAmount from "./RingAmount.jsx";
 import CategoryBreakdown from "./CategoryBreakdown.jsx";
 import HistoryChart from "./HistoryChart.jsx";
 import Modal from "./Modal.jsx";
+import DreamGoal from "./DreamGoal.jsx";
 import { PlusIcon } from "./icons.jsx";
 
 const DANGER = "#EF4444";
@@ -259,6 +260,11 @@ export default function Dashboard({
           </div>
         </div>
       </section>
+
+      {/* Dream Goal */}
+      {settings.dreamGoal && (
+        <DreamGoal dreamGoal={settings.dreamGoal} savedTotal={saved.total} symbol={symbol} />
+      )}
 
       {/* Stat tiles */}
       <div className="mb-4 grid grid-cols-2 gap-3">

@@ -17,6 +17,7 @@ export const DEFAULT_SETTINGS = {
   currencySymbol: "₱",
   weekStartDay: 1, // Monday
   spendDaysPerWeek: 5, // typical school spending days; drives the daily-limit pacing
+  dreamGoal: null, // { name: string, target: number, imageBase64: string }
 };
 
 export const DEFAULT_WEEK_OVERRIDES = {};

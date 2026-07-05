@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { parseAmount } from "./budget.js";
+import { parseAmount, formatMoney } from "./budget.js";
 import CategoryEditor from "./CategoryEditor.jsx";
+import DreamGoalEditor from "./DreamGoalEditor.jsx";
 import Modal from "./Modal.jsx";
 
 const WEEK_DAYS = [
@@ -36,6 +37,7 @@ export default function Settings({
   const [copied, setCopied] = useState(false);
   const [hashInput, setHashInput] = useState("");
   const [updating, setUpdating] = useState(false);
+  const [goalModalOpen, setGoalModalOpen] = useState(false);
 
   // Force the latest version: ask the service worker to update, clear the shell
   // cache, then reload so fresh files are fetched. Data lives in the cloud and
@@ -182,6 +184,32 @@ export default function Settings({
         </Field>
       </Section>
 
+      <Section title="Dream Goal">
+        {settings.dreamGoal ? (
+          <div className={`${card} overflow-hidden`}>
+             <div className="relative aspect-video w-full bg-gray-100 dark:bg-gray-800">
+               <img src={settings.dreamGoal.imageBase64} alt={settings.dreamGoal.name} className="h-full w-full object-cover" />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+               <div className="absolute bottom-3 left-4 right-4 text-white">
+                 <h3 className="font-bold drop-shadow-md">{settings.dreamGoal.name}</h3>
+                 <p className="text-sm font-medium drop-shadow-sm">Target: {formatMoney(settings.dreamGoal.target, symbol)}</p>
+               </div>
+             </div>
+             <div className="flex gap-2 p-3">
+               <button onClick={() => setGoalModalOpen(true)} className="flex-1 rounded-xl bg-gray-100 py-2.5 text-sm font-semibold text-gray-800 active:scale-[0.99] dark:bg-gray-800 dark:text-gray-100">Edit</button>
+               <button onClick={() => onUpdateSettings({ dreamGoal: null })} className="flex-1 rounded-xl bg-red-500/10 py-2.5 text-sm font-semibold text-red-500 active:scale-[0.99]">Remove</button>
+             </div>
+          </div>
+        ) : (
+          <button onClick={() => setGoalModalOpen(true)} className={`${card} flex w-full items-center justify-center gap-2 py-4 text-sm font-semibold text-gray-900 active:scale-[0.99] dark:text-gray-50`}>
+             <span className="text-xl">+</span> Set Dream Goal
+          </button>
+        )}
+        <p className="mt-2 px-1 text-xs text-gray-400">
+          Upload a picture of something you're saving for. It will appear on your dashboard and gradually reveal itself as you stay under budget.
+        </p>
+      </Section>
+
       <Section title="Categories">
         <div className={`${card} divide-y divide-gray-100 overflow-hidden dark:divide-gray-800`}>
           {categories.map((c) => (
@@ -261,6 +289,18 @@ export default function Settings({
             setEditing(null);
           }}
           onClose={() => setEditing(null)}
+        />
+      )}
+
+      {goalModalOpen && (
+        <DreamGoalEditor
+          dreamGoal={settings.dreamGoal}
+          symbol={symbol}
+          onSave={(dreamGoal) => {
+            onUpdateSettings({ dreamGoal });
+            setGoalModalOpen(false);
+          }}
+          onClose={() => setGoalModalOpen(false)}
         />
       )}
 
